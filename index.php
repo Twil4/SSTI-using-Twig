@@ -39,3 +39,19 @@ if(empty($_GET)){
 		'meoArray' => $meoArray
 	]);
 }
+
+if(isset($_GET['ID'])){
+	$ID = $_GET['ID'];
+	$sql = "SELECT * FROM meo WHERE `ID` = '$ID'";
+	$result = mysqli_query($connect, $sql);
+	$each = mysqli_fetch_assoc($result);
+	$meo = array(
+		'ID' => $each['ID'],
+		'name' => $each['name'],
+		'content' => $each['content'],
+		'link' => $each['link']
+	);
+	echo $twig->render('thongtin.html', [
+		'meo' => $meo
+	]);
+}
