@@ -1,0 +1,10 @@
+Hello, {{ 7*7 }}!. Bạn đã sống được {{ age }} năm.
+
+{ if age > 15 }
+	<br>Mày lớn hơn 15 tủi!
+{ endif }
+<br><br>
+
+{ for user in users }
+	Tên: {{ user.name }}, tuổi: {{ user.age }}<br>
+{ endfor }
