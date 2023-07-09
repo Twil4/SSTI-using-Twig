@@ -14,23 +14,23 @@
           <img src="{{ meo.link }}" alt="">
         </div>
         <div class="col">{{ meo.content }}</div>
+        { for cm in binhluan }
         <div class="col">
-          A: Mèo xinh xỉu
+          {{ cm.name }}: {{ cm.content }}
         </div>
-        <div class="col">
-          A: Mèo xinh
-        </div>
+        { endfor }
       </div>
-      <form class="col" action="">
+      <form class="col" action="?ID={{ meo.ID }}" method="post">
+        <input type="hidden" value="{{ meo.ID }}" name="ID_meo">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">Nhập tên</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nhập tên">
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nhập tên" name="name">
         </div>
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-label">Nhập bình luận</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"></textarea>
         </div>
-        <button type="button" class="btn btn-primary">Bình luận</button>
+        <button type="submit" class="btn btn-primary" name="push">Bình luận</button>
       </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

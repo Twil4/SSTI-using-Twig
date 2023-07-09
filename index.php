@@ -41,6 +41,13 @@ if(empty($_GET)){
 }
 
 if(isset($_GET['ID'])){
+	if(isset($_POST['push'])){
+		$name = $_POST['name'];
+		$content = $_POST['content'];
+		$ID_meo = $_POST['ID_meo'];
+		$sql = "INSERT INTO `binhluan`(`name`, `content`, `ID_meo`) VALUES ('$name','$content','$ID_meo')";
+		mysqli_query($connect, $sql);
+	}
 	$ID = $_GET['ID'];
 	$sql = "SELECT * FROM meo WHERE `ID` = '$ID'";
 	$result = mysqli_query($connect, $sql);
@@ -51,7 +58,22 @@ if(isset($_GET['ID'])){
 		'content' => $each['content'],
 		'link' => $each['link']
 	);
+	$sql = "SELECT * FROM binhluan WHERE `ID_MEO` = '$ID'";
+	$result = mysqli_query($connect, $sql);
+	$binhluanArray = array();
+	if(mysqli_num_rows($result) > 0) {
+		while($row = mysqli_fetch_assoc($result)){
+			$binhluan = array(
+				'ID' => $row['ID'],
+				'name' => $row['name'],
+				'content' => $row['content']
+			);
+			$binhluanArray[] = $binhluan;
+		}
+	}
+
 	echo $twig->render('thongtin.html', [
-		'meo' => $meo
+		'meo' => $meo,
+		'binhluan' => $binhluanArray
 	]);
 }
